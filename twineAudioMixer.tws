@@ -1,0 +1,640 @@
+(dp0
+S'buildDestination'
+p1
+VC:\u005cUsers\u005cjriley\u005cDesktop\u005caudiotest.html
+p2
+sS'saveDestination'
+p3
+VC:\u005cUsers\u005cjriley\u005cDesktop\u005ctwineAudioMixer.tws
+p4
+sS'target'
+p5
+S'sugarcane'
+p6
+sS'storyPanel'
+p7
+(dp8
+S'widgets'
+p9
+(lp10
+(dp11
+S'selected'
+p12
+I00
+sS'pos'
+p13
+(lp14
+I10
+aI10
+asS'passage'
+p15
+(itiddlywiki
+Tiddler
+p16
+(dp18
+S'text'
+p19
+V[[Mixer]]\u000a\u000a<html><a href="#" onclick="loadPlayer()">Load Player</a></html>\u000a\u000a<<loopsound "Get it Right Bass.mp3">>\u000a<<loopsound "Get it Right Drumloop.mp3">>\u000a<<loopsound "Get it Right Square Synth.mp3">>\u000a
+p20
+sS'title'
+p21
+VStart
+p22
+sS'modified'
+p23
+ctime
+struct_time
+p24
+((I2015
+I7
+I7
+I15
+I49
+I29
+I1
+I188
+I1
+tp25
+(dp26
+tp27
+Rp28
+sS'tags'
+p29
+(lp30
+sS'created'
+p31
+g24
+((I2014
+I1
+I21
+I9
+I5
+I7
+I1
+I21
+I0
+tp32
+(dp33
+tp34
+Rp35
+sbsa(dp36
+g12
+I00
+sg13
+(lp37
+I10
+aI150
+asg15
+(itiddlywiki
+Tiddler
+p38
+(dp39
+g19
+VTwine Audio Mixer
+p40
+sg21
+VStoryTitle
+p41
+sg23
+g24
+((I2015
+I7
+I7
+I15
+I50
+I18
+I1
+I188
+I1
+tp42
+(dp43
+tp44
+Rp45
+sg29
+(lp46
+sg31
+g24
+((I2014
+I1
+I21
+I9
+I5
+I7
+I1
+I21
+I0
+tp47
+(dp48
+tp49
+Rp50
+sbsa(dp51
+g12
+I00
+sg13
+(lp52
+I10
+aI290
+asg15
+(itiddlywiki
+Tiddler
+p53
+(dp54
+g19
+Vby 20hz20khz
+p55
+sg21
+VStoryAuthor
+p56
+sg23
+g24
+((I2015
+I7
+I7
+I15
+I50
+I45
+I1
+I188
+I1
+tp57
+(dp58
+tp59
+Rp60
+sg29
+(lp61
+sg31
+g24
+((I2014
+I1
+I21
+I9
+I5
+I7
+I1
+I21
+I0
+tp62
+(dp63
+tp64
+Rp65
+sbsa(dp66
+g12
+I00
+sg13
+(lp67
+I759
+aI27
+asg15
+(itiddlywiki
+Tiddler
+p68
+(dp69
+g19
+V(function () {\u000a  "use strict";\u000a  version.extensions['soundMacros'] = {\u000a    major: 1,\u000a    minor: 1,\u000a    revision: 2\u000a  };\u000a  var p = macros['playsound'] = {\u000a    soundtracks: {},\u000a    handler: function (a, b, c, d) {\u000a      var loop = function (m) {\u000a          if (m.loop == undefined) {\u000a            m.loopfn = function () {\u000a              this.play();\u000a            };\u000a            m.addEventListener('ended', m.loopfn, 0);\u000a          } else m.loop = true;\u000a          m.play();\u000a          };\u000a      var s = eval(d.fullArgs());\u000a      if (s) {\u000a        s = s.toString();\u000a        var m = this.soundtracks[s.slice(0, s.lastIndexOf("."))];\u000a        if (m) {\u000a          if (b == "playsound") {\u000a            m.play();\u000a          } else if (b == "loopsound") {\u000a            loop(m);\u000a          } else if (b == "pausesound") {\u000a            m.pause();\u000a          } else if (b == "unloopsound") {\u000a            if (m.loop != undefined) {\u000a              m.loop = false;\u000a            } else if (m.loopfn) {\u000a              m.removeEventListener('ended', m.loopfn);\u000a              delete m.loopfn;\u000a            }\u000a          } else if (b == "stopsound") {\u000a            m.pause();\u000a            m.currentTime = 0;\u000a} else if (b == "mutesound") {\u000a            m.volume = 0;\u000a} else if (b == "unmutesound") {\u000a            m.volume = 1;\u000a          } else if (b == "fadeoutsound" || b == "fadeinsound") {\u000a            if (m.interval) clearInterval(m.interval);\u000a            if (b == "fadeinsound") {\u000a              if (m.currentTime>0) return;\u000a              m.volume = 0;\u000a              loop(m);\u000a            } else {\u000a              if (!m.currentTime) return;\u000a              m.play();\u000a            }\u000a            var v = m.volume;\u000a            m.interval = setInterval(function () {\u000a              v = Math.min(1, Math.max(0, v + 0.005 * (b == "fadeinsound" ? 1 : -1)));\u000a              m.volume = Math.easeInOut(v);\u000a              if (v == 0 || v == 1) clearInterval(m.interval);\u000a              if (v == 0) {\u000a                m.pause();\u000a                m.currentTime = 0;\u000a                m.volume = 1;\u000a              }\u000a            }, 10);\u000a          }\u000a        }\u000a      }\u000a    }\u000a  }\u000a  macros['fadeinsound'] = p;\u000a  macros['fadeoutsound'] = p;\u000a  macros['unloopsound'] = p;\u000a  macros['loopsound'] = p;\u000a  macros['pausesound'] = p;\u000a  macros['stopsound'] = p;\u000amacros['mutesound'] = p;\u000amacros['unmutesound'] = p;\u000a  macros['stopallsound'] = {\u000a    handler: function () {\u000a      var s = macros.playsound.soundtracks;\u000a      for (var j in s) {\u000a		if (s.hasOwnProperty(j)) {\u000a          s[j].pause();\u000a          if (s[j].currentTime) {\u000a		    s[j].currentTime = 0;\u000a		  }\u000a		}\u000a      }\u000a    }\u000a  }\u000a  var div = document.getElementById("storeArea").firstChild;\u000a  var fe = ["ogg", "mp3", "m4a", "wav", "webm"];\u000a  while (div) {\u000a    var b = String.fromCharCode(92);\u000a    var q = '"';\u000a    var re = "['" + q + "]([^" + q + "']*?)" + b + ".(ogg|mp3|m4a|wav|webm)['" + q + "]";\u000a    k(new RegExp(re, "gi"));\u000a    div = div.nextSibling;\u000a  }\u000a\u000a  function k(c, e) {\u000a    do {\u000a      var d = c.exec(div.innerHTML);\u000a      if (d) {\u000a        var a = new Audio();\u000a        if (a.canPlayType) {\u000a          for (var i = -1; i < fe.length; i += 1) {\u000a            if (i >= 0) d[2] = fe[i];\u000a            if (a.canPlayType("audio/" + d[2])) break;\u000a          }\u000a          if (i < fe.length) {\u000a            a.setAttribute("src", d[1] + "." + d[2]);\u000a            a.interval = null;\u000a            macros.playsound.soundtracks[d[1]] = a;\u000a          } else console.log("Browser can't play '" + d[1] + "'");\u000a        }\u000a      }\u000a    } while (d);\u000a  }\u000a}());
+p70
+sg21
+Vaudio
+p71
+sg23
+g24
+((I2014
+I4
+I15
+I13
+I0
+I36
+I1
+I105
+I1
+tp72
+(dp73
+tp74
+Rp75
+sg29
+(lp76
+Vscript
+p77
+asg31
+g24
+((I2014
+I4
+I15
+I12
+I25
+I55
+I1
+I105
+I1
+tp78
+(dp79
+tp80
+Rp81
+sbsa(dp82
+g12
+I00
+sg13
+(lp83
+I190
+aI16
+asg15
+(itiddlywiki
+Tiddler
+p84
+(dp85
+g19
+VDrums - [[Mute|mutedrums]] - [[Unmute|unmutedrums]]\u000a\u000aBass - [[Mute|mutebass]] - [[Unmute|unmutebass]]\u000a\u000aSynth - [[Mute|mutesynth]] - [[Unmute|unmutesynth]]
+p86
+sg21
+VMixer
+p87
+sg23
+g24
+((I2015
+I7
+I7
+I15
+I49
+I45
+I1
+I188
+I1
+tp88
+(dp89
+tp90
+Rp91
+sg29
+(lp92
+sg31
+g24
+((I2014
+I4
+I15
+I12
+I30
+I28
+I1
+I105
+I1
+tp93
+(dp94
+tp95
+Rp96
+sbsa(dp97
+g12
+I00
+sg13
+(lp98
+F374.0
+aF37.0
+asg15
+(itiddlywiki
+Tiddler
+p99
+(dp100
+g19
+V<<mutesound "Get it Right Drumloop.mp3">><<display "Mixer">>
+p101
+sg21
+Vmutedrums
+p102
+sg23
+g24
+((I2015
+I7
+I7
+I15
+I51
+I8
+I1
+I188
+I1
+tp103
+(dp104
+tp105
+Rp106
+sg29
+(lp107
+sg31
+g24
+((I2014
+I4
+I15
+I12
+I32
+I25
+I1
+I105
+I1
+tp108
+(dp109
+tp110
+Rp111
+sbsa(dp112
+g12
+I01
+sg13
+(lp113
+I544
+aI48
+asg15
+(itiddlywiki
+Tiddler
+p114
+(dp115
+g19
+V<<unmutesound "Get it Right Drumloop.mp3">><<display "Mixer">>
+p116
+sg21
+Vunmutedrums
+p117
+sg23
+g24
+((I2014
+I4
+I15
+I12
+I33
+I12
+I1
+I105
+I1
+tp118
+(dp119
+tp120
+Rp121
+sg29
+(lp122
+sg31
+g24
+((I2014
+I4
+I15
+I12
+I33
+I3
+I1
+I105
+I1
+tp123
+(dp124
+tp125
+Rp126
+sbsa(dp127
+g12
+I00
+sg13
+(lp128
+I382
+aI188
+asg15
+(itiddlywiki
+Tiddler
+p129
+(dp130
+g19
+V<<mutesound "Get it Right Bass.mp3">><<display "Mixer">>
+p131
+sg21
+Vmutebass
+p132
+sg23
+g24
+((I2014
+I4
+I15
+I12
+I33
+I26
+I1
+I105
+I1
+tp133
+(dp134
+tp135
+Rp136
+sg29
+(lp137
+sg31
+g24
+((I2014
+I4
+I15
+I12
+I33
+I17
+I1
+I105
+I1
+tp138
+(dp139
+tp140
+Rp141
+sbsa(dp142
+g12
+I00
+sg13
+(lp143
+I512
+aI182
+asg15
+(itiddlywiki
+Tiddler
+p144
+(dp145
+g19
+V<<unmutesound "Get it Right Bass.mp3">><<display "Mixer">>
+p146
+sg21
+Vunmutebass
+p147
+sg23
+g24
+((I2014
+I4
+I15
+I12
+I33
+I51
+I1
+I105
+I1
+tp148
+(dp149
+tp150
+Rp151
+sg29
+(lp152
+sg31
+g24
+((I2014
+I4
+I15
+I12
+I33
+I28
+I1
+I105
+I1
+tp153
+(dp154
+tp155
+Rp156
+sbsa(dp157
+g12
+I00
+sg13
+(lp158
+I375
+aI341
+asg15
+(itiddlywiki
+Tiddler
+p159
+(dp160
+g19
+V<<mutesound "Get it Right Square Synth.mp3">><<display "Mixer">>
+p161
+sg21
+Vmutesynth
+p162
+sg23
+g24
+((I2014
+I4
+I15
+I12
+I34
+I42
+I1
+I105
+I1
+tp163
+(dp164
+tp165
+Rp166
+sg29
+(lp167
+sg31
+g24
+((I2014
+I4
+I15
+I12
+I34
+I19
+I1
+I105
+I1
+tp168
+(dp169
+tp170
+Rp171
+sbsa(dp172
+g12
+I00
+sg13
+(lp173
+F521.0
+aF335.0
+asg15
+(itiddlywiki
+Tiddler
+p174
+(dp175
+g19
+V<<unmutesound "Get it Right Square Synth.mp3">><<display "Mixer">>
+p176
+sg21
+Vunmutesynth
+p177
+sg23
+g24
+((I2014
+I4
+I15
+I12
+I35
+I14
+I1
+I105
+I1
+tp178
+(dp179
+tp180
+Rp181
+sg29
+(lp182
+sg31
+g24
+((I2014
+I4
+I15
+I12
+I34
+I54
+I1
+I105
+I1
+tp183
+(dp184
+tp185
+Rp186
+sbsa(dp187
+g12
+I00
+sg13
+(lp188
+F904.0
+aF23.0
+asg15
+(itiddlywiki
+Tiddler
+p189
+(dp190
+g19
+V(function loadPlayer() {\u000avar audioPlayer = new Audio();\u000aaudioPlayer.controls="controls";\u000aaudioPlayer.src="Get it Right Drumloop.mp3";\u000adocument.getElementById("player").appendChild(audioPlayer);\u000a});\u000a
+p191
+sg21
+VUntitled Script 1
+p192
+sg23
+g24
+((I2014
+I4
+I15
+I13
+I27
+I42
+I1
+I105
+I1
+tp193
+(dp194
+tp195
+Rp196
+sg29
+(lp197
+Vscript
+p198
+asg31
+g24
+((I2014
+I4
+I15
+I13
+I23
+I54
+I1
+I105
+I1
+tp199
+(dp200
+tp201
+Rp202
+sbsasS'scale'
+p203
+I1
+sS'snapping'
+p204
+I00
+ss.
